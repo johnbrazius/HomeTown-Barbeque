@@ -3,6 +3,7 @@ import { business, hours, serviceModel } from "@/content/site";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Reveal } from "@/components/ui/Reveal";
 import { MapFacade } from "./MapFacade";
+import { SocialLinks } from "@/components/ui/SocialIcons";
 
 const dayLabel: Record<string, string> = {
   Monday: "Mon",
@@ -128,6 +129,10 @@ export function Visit({ index = "05" }: { index?: string }) {
                 <Phone aria-hidden className="size-3.5" />
                 Call to confirm today’s hours
               </a>
+              <div className="mt-6 flex items-center gap-4 border-t border-cream/10 pt-6">
+                <p className="label text-cream/70">Daily updates</p>
+                <SocialLinks />
+              </div>
             </Reveal>
           </div>
 

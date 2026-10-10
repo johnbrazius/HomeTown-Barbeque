@@ -1,4 +1,4 @@
-import { business, hours } from "@/content/site";
+import { business, hours, social } from "@/content/site";
 import { siteUrl } from "./site-url";
 
 /**
@@ -28,6 +28,8 @@ export function restaurantJsonLd() {
     name: business.name,
     url,
     telephone: business.phoneE164,
+    logo: new URL("/brand/hometown-logo.png", url).toString(),
+    sameAs: social.map((s) => s.href),
     servesCuisine: business.cuisine,
     hasMenu: new URL("/menu", url).toString(),
     address: {

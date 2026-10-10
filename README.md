@@ -98,8 +98,9 @@ same way. Rendering pauses whenever the opener is off-screen.
 
 ### Design system
 
-- **Palette** (Tailwind tokens in `globals.css`): `ink` #0D0C0B · `char` #171513 · `ember` #B94728 ·
-  `cream` #F1E5D0 · `smoke` #A49A8D · `bark` #35241B.
+- **Palette** (Tailwind tokens in `globals.css`), taken from the Hometown logo: navy `ink` #0F1A2E · `char` #15233D ·
+  `bark` #1E2F4F, brick red `ember` #A8323F (with AA-checked text/fill variants), warm white `cream` #F7F2E8,
+  `smoke` #A9B3C7.
 - **Type:** Big Shoulders (industrial condensed display + micro-labels), Instrument Serif italic (editorial accents),
   Hanken Grotesk (body/UI). Loaded with `next/font` (self-hosted, `display: swap`, fallbacks set).
 - **Rhythm:** dark hero → ember ticker → cream story → charcoal menu → near-black pit → cream hall → brown visit → black footer.
@@ -202,8 +203,8 @@ real values (`.gitignore` already excludes them, except `.env.example`).
 
 This checklist matters because the site uses a real business's name and details.
 
-- [ ] **Written approval from Hometown Bar-B-Que** to publish, and their brand assets (logo, wordmark). The current
-      wordmark is a text-only concept, not their logo.
+- [ ] **Written approval from Hometown Bar-B-Que** to publish and to use their logo (`public/brand/hometown-logo.png`,
+      150px — ask for an SVG/vector version for the sharpest result).
 - [ ] **Add the six venue photos** (see [Venue photos](#venue-photos-3d-home-page)) and replace the concept
       food imagery with licensed photography, then remove the "Illustrative" tags and update alt text.
 - [ ] **Story & press:** confirm the timeline (2012 lease, Sandy, September 2013 opening, 2019 expansion), the
@@ -218,7 +219,7 @@ This checklist matters because the site uses a real business's name and details.
       bar wording in the Atmosphere section.
 - [ ] **Ordering:** if the restaurant has an official online-ordering partner, add it as a CTA (none is linked now
       because none could be verified).
-- [ ] **Social links:** add only the restaurant's verified accounts.
+- [ ] **Social links:** Instagram and Facebook are set in `src/content/site.ts` (`social`) — confirm they're current.
 - [ ] Remove the concept notice in `site.ts` / footer, set `NEXT_PUBLIC_ALLOW_INDEXING=true`, set the real domain.
 - [ ] Add privacy and accessibility pages if analytics or a map embed are used in production.
 - [ ] Run Lighthouse / PageSpeed Insights on the deployed URL and fix anything it flags.

@@ -81,6 +81,12 @@ export const serviceModel = [
   },
 ] as const;
 
+/** Official social accounts (supplied by the client). */
+export const social = [
+  { label: "Instagram", handle: "@hometownbarbque", href: "https://www.instagram.com/hometownbarbque/" },
+  { label: "Facebook", handle: "Hometown Bar-B-Que", href: "https://www.facebook.com/hometownbarbque/" },
+] as const;
+
 export type NavItem = { label: string; href: string; blurb?: string };
 
 /** Main header links (desktop shows these inline). */
@@ -128,4 +134,4 @@ export const legalNav: NavItem[] = [
 ];
 
 export const conceptNotice =
-  "Independent redesign concept for portfolio purposes. Not affiliated with, commissioned or endorsed by Hometown Bar-B-Que. Food and place imagery is AI-generated and illustrative — it does not depict the restaurant’s actual food or premises.";
+  "Redesign concept prepared for Hometown Bar-B-Que. Not yet commissioned or endorsed by the restaurant; the Hometown name and logo belong to Hometown Bar-B-Que. Food and place imagery is AI-generated and illustrative — it does not depict the restaurant’s actual food or premises.";

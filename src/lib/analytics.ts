@@ -16,7 +16,8 @@ export type TrackEvent =
   | "menu_cta_click"
   | "directions_click"
   | "phone_click"
-  | "catering_email_click";
+  | "catering_email_click"
+  | "social_click";
 
 type Plausible = (event: string, options?: { props?: Record<string, string> }) => void;
 

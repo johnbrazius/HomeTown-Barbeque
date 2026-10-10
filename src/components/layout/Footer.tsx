@@ -2,6 +2,7 @@ import Link from "next/link";
 import { business, conceptNotice, legalNav, navGroups } from "@/content/site";
 import { recognition } from "@/content/story";
 import { Wordmark } from "@/components/ui/Wordmark";
+import { SocialLinks } from "@/components/ui/SocialIcons";
 
 export function Footer() {
   return (
@@ -13,7 +14,7 @@ export function Footer() {
 
         <div className="mt-14 grid gap-12 border-t border-cream/15 pt-12 sm:grid-cols-2 lg:grid-cols-12">
           <div className="lg:col-span-3">
-            <Wordmark className="text-cream" />
+            <Wordmark size="lg" className="text-cream" />
             <p className="mt-6 max-w-xs text-cream/60">Pit-smoked barbecue on Van Brunt Street, Red Hook, Brooklyn.</p>
             <address className="mt-6 space-y-1 not-italic text-cream/85">
               <p>{business.street}</p>
@@ -31,6 +32,7 @@ export function Footer() {
                 </a>
               </p>
             </address>
+            <SocialLinks className="mt-6" />
             <a
               href={recognition.href}
               target="_blank"

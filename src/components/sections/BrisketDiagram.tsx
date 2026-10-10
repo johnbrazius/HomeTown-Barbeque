@@ -3,7 +3,7 @@
  * illustration, not a depiction of the restaurant's product.
  */
 export function BrisketDiagram({ tone = "dark" }: { tone?: "dark" | "cream" }) {
-  const ink = tone === "dark" ? "#f1e5d0" : "#0d0c0b";
+  const ink = tone === "dark" ? "#f7f2e8" : "#0f1a2e";
   const muted = tone === "dark" ? "rgba(241,229,208,0.6)" : "rgba(13,12,11,0.65)";
   return (
     <figure className="w-full">

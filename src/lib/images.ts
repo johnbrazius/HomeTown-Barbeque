@@ -54,7 +54,7 @@ export function venueImages(): VenueImage[] {
           width,
           height,
           alt: slot.alt,
-          tone: "#1d1916",
+          tone: "#15233d",
         };
       }
     }

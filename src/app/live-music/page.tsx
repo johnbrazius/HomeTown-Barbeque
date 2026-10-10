@@ -1,6 +1,6 @@
 import { Music, Beer, Users } from "lucide-react";
 import { pageMeta } from "@/lib/metadata";
-import { business } from "@/content/site";
+import { business, social } from "@/content/site";
 import { PageHero } from "@/components/ui/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading, Accent } from "@/components/ui/SectionHeading";
@@ -30,9 +30,14 @@ export default function LiveMusicPage() {
         accent="sound."
         intro={<p>Barbecue tastes better with a band. On weekend nights, Hometown’s hall turns up the volume.</p>}
       >
-        <ButtonLink href={`tel:${business.phoneE164}`} variant="outline" track="phone_click" trackLocation="music_hero">
-          Call to ask who’s playing
-        </ButtonLink>
+        <div className="flex flex-wrap items-center gap-4">
+          <ButtonLink href={social[0].href} external track="social_click" trackLocation="music_hero">
+            Line-ups on Instagram
+          </ButtonLink>
+          <ButtonLink href={`tel:${business.phoneE164}`} variant="outline" track="phone_click" trackLocation="music_hero">
+            Call to ask
+          </ButtonLink>
+        </div>
       </PageHero>
 
       {/* Equalizer-style visual + nights */}
@@ -94,7 +99,7 @@ export default function LiveMusicPage() {
               honky-tonk and blues to go with the barbecue.
             </p>
             <p>
-              Line-ups change week to week — call the restaurant to ask who’s playing.
+              Line-ups change week to week — follow Hometown on Instagram or Facebook, or call the restaurant to ask who’s playing.
             </p>
             <p>
               <a

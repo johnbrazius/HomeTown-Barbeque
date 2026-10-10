@@ -329,8 +329,8 @@ export default function ExperienceScene({
       eventSource={typeof document !== "undefined" ? document.body : undefined}
       eventPrefix="client"
       onCreated={({ scene, gl }) => {
-        scene.background = new THREE.Color("#0d0c0b");
-        scene.fog = new THREE.Fog("#0d0c0b", 9, 28);
+        scene.background = new THREE.Color("#0f1a2e");
+        scene.fog = new THREE.Fog("#0f1a2e", 9, 28);
         gl.outputColorSpace = THREE.SRGBColorSpace;
       }}
     >

@@ -1,18 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #0d0c0b;
-  --color-char: #171513;
-  --color-ember: #b94728;
-  --color-ember-bright: #d65a35; /* text on char/ink */
-  --color-ember-glow: #e67a55; /* text on bark */
-  --color-ember-deep: #a33c20; /* solid fills behind small cream text (AA) */
-  --color-ember-deeper: #8c321a; /* hover for ember-deep */
-  --color-ember-ink: #93361c; /* small text on cream */
-  --color-cream: #f1e5d0;
-  --color-cream-deep: #e6d6ba;
-  --color-smoke: #a49a8d;
-  --color-bark: #35241b;
+  /* Brand palette — taken from the Hometown logo: navy, brick red, warm white.
+     Token names are kept from the first draft so components didn't change. */
+  --color-ink: #0f1a2e; /* deepest navy — page background */
+  --color-char: #15233d; /* navy — alternate dark sections */
+  --color-bark: #1e2f4f; /* lighter navy — visit section, cards */
+  --color-ember: #a8323f; /* logo red — rules, ticker, decoration */
+  --color-ember-bright: #e87a68; /* red text on ink/char (AA) */
+  --color-ember-glow: #ec8472; /* red text on bark (AA) */
+  --color-ember-deep: #9e2a3a; /* button fills behind white text (AA) */
+  --color-ember-deeper: #80202e; /* hover for ember-deep */
+  --color-ember-ink: #9e2a3a; /* small red text on cream (AA) */
+  --color-cream: #f7f2e8; /* warm white */
+  --color-cream-deep: #eee6d6;
+  --color-smoke: #a9b3c7; /* muted blue-gray */
 
   --font-display: var(--font-big-shoulders), "Arial Narrow", Impact, sans-serif;
   --font-serif: var(--font-instrument), Georgia, "Times New Roman", serif;

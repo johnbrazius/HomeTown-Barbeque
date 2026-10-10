@@ -7,6 +7,7 @@ import { Menu as MenuIcon, X, Phone, MapPin, ChevronDown, ArrowUpRight } from "l
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { business, nav, navGroups, legalNav } from "@/content/site";
 import { Wordmark } from "@/components/ui/Wordmark";
+import { SocialLinks } from "@/components/ui/SocialIcons";
 
 const isActive = (pathname: string, href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
@@ -251,6 +252,7 @@ export function Header() {
                   Get directions <ArrowUpRight aria-hidden className="size-3.5" />
                   <span className="sr-only"> (opens in a new tab)</span>
                 </a>
+                <SocialLinks className="mt-6" />
               </div>
             </div>
           </motion.div>
@@ -323,6 +325,7 @@ export function Header() {
                 </div>
               </div>
               <div className="mt-auto grid gap-3 pt-10">
+                <SocialLinks className="mb-2" />
                 <p className="label text-smoke">{business.streetShort}, Brooklyn</p>
                 <a
                   href={`tel:${business.phoneE164}`}

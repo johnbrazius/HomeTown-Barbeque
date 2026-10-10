@@ -1,4 +1,4 @@
-import { Phone, Navigation, Clock } from "lucide-react";
+import { Phone, Clock } from "lucide-react";
 import { business, hours, serviceModel } from "@/content/site";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Reveal } from "@/components/ui/Reveal";
@@ -120,16 +120,13 @@ export function Visit({ index = "05" }: { index?: string }) {
                 })}
               </p>
               <a
-                href={business.officialLocations}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-track="official_site_click"
+                href={`tel:${business.phoneE164}`}
+                data-track="phone_click"
                 data-track-location="hours"
                 className="label mt-5 inline-flex min-h-11 items-center gap-2 text-ember-glow hover:text-cream"
               >
-                <Navigation aria-hidden className="size-3.5" />
-                Official hours &amp; locations
-                <span className="sr-only"> (opens in a new tab)</span>
+                <Phone aria-hidden className="size-3.5" />
+                Call to confirm today’s hours
               </a>
             </Reveal>
           </div>

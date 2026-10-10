@@ -19,7 +19,7 @@ const notes = [
   {
     icon: Beer,
     title: "At the bar",
-    body: "Drinks to go with the smoke — see the official site for what’s pouring.",
+    body: "Drinks to go with the smoke — ask the bartender what’s pouring.",
   },
   {
     icon: Music,

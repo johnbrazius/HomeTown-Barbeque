@@ -26,10 +26,10 @@ export function restaurantJsonLd() {
     "@type": "Restaurant",
     "@id": `${url}#restaurant`,
     name: business.name,
-    url: business.officialSite,
+    url,
     telephone: business.phoneE164,
     servesCuisine: business.cuisine,
-    hasMenu: business.officialMenu,
+    hasMenu: new URL("/menu", url).toString(),
     address: {
       "@type": "PostalAddress",
       streetAddress: business.streetShort,

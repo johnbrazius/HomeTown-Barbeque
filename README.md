@@ -211,7 +211,7 @@ This checklist matters because the site uses a real business's name and details.
 - [ ] **Events:** confirm the private-event days and the 45-guest catering minimum.
 - [ ] **Hours:** confirm the full weekly schedule, fill `hours.schedule`, set `verified: true`. Sources disagreed
       on closing times when this was built.
-- [ ] **Menu:** confirm every item still appears on <https://hometownbbq.com/menu-rh>, add current prices, and
+- [ ] **Menu:** confirm every item with the restaurant's current menu, add current prices, and
       confirm the "Korean Ribs" / "Jerk Ribs" naming. Item names came from official menu excerpts and the
       restaurant's Google listing; the official site couldn't be loaded directly while this was built.
 - [ ] **Story facts:** confirm "opened 2013", "oak", "traditional Southern techniques", and the live-music and

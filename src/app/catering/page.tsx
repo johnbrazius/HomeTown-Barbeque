@@ -50,8 +50,8 @@ export default function CateringPage() {
         }
       >
         <div className="flex flex-col gap-3 sm:flex-row">
-          <ButtonLink href={events.officialEvents} external track="official_site_click" trackLocation="catering_hero">
-            Catering inquiry
+          <ButtonLink href={`mailto:${business.cateringEmail}`} track="catering_email_click" trackLocation="catering_hero">
+            Email the catering team
           </ButtonLink>
           <ButtonLink href={`tel:${business.phoneE164}`} variant="outline" track="phone_click" trackLocation="catering_hero">
             Call {business.phoneDisplay}
@@ -134,8 +134,8 @@ export default function CateringPage() {
               <ButtonLink href={`mailto:${business.cateringEmail}`} track="catering_email_click" trackLocation="catering_checklist">
                 Email {business.cateringEmail}
               </ButtonLink>
-              <ButtonLink href={events.officialEvents} external variant="outline" track="official_site_click" trackLocation="catering_checklist">
-                Official catering page
+              <ButtonLink href={`tel:${business.phoneE164}`} variant="outline" track="phone_click" trackLocation="catering_checklist">
+                Call {business.phoneDisplay}
               </ButtonLink>
             </div>
           </div>

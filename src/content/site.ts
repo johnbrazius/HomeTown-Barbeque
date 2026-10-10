@@ -21,9 +21,6 @@ export const business = {
   founded: "2013",
   /** One address, used everywhere — the old site listed several different ones. */
   cateringEmail: "catering@hometownbbq.com",
-  officialSite: "https://hometownbbq.com/",
-  officialMenu: "https://hometownbbq.com/menu-rh",
-  officialLocations: "https://hometownbbq.com/locations",
   directions:
     "https://www.google.com/maps/dir/?api=1&destination=Hometown%20Bar-B-Que%2C%20454%20Van%20Brunt%20St%2C%20Brooklyn%2C%20NY%2011231",
   mapSearch:
@@ -65,7 +62,7 @@ export const hours: {
     { label: "Tuesday – Sunday", value: "Doors at noon" },
     { label: "Monday", value: "Closed" },
   ],
-  note: "Closing times vary by day, and the pit closes early when the meat sells out. Confirm today’s hours on hometownbbq.com or by phone before you head over.",
+  note: "Closing times vary by day, and the pit closes early when the meat sells out. Call to confirm today’s hours before you head over.",
   schedule: [],
 };
 

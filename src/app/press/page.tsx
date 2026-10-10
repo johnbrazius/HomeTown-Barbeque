@@ -80,14 +80,14 @@ export default function PressPage() {
             Media inquiries
           </h2>
           <div className="space-y-4 text-lg text-ink/80">
-            <p>For interviews, photography and press requests, contact the restaurant through its official channels.</p>
+            <p>For interviews, photography and press requests, call the restaurant.</p>
             <a
-              href={business.officialSite}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`tel:${business.phoneE164}`}
+              data-track="phone_click"
+              data-track-location="press"
               className="label inline-flex min-h-11 items-center text-ember-ink underline underline-offset-4"
             >
-              hometownbbq.com ↗<span className="sr-only"> (opens in a new tab)</span>
+              Call {business.phoneDisplay}
             </a>
           </div>
         </div>

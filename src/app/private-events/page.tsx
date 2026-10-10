@@ -33,8 +33,8 @@ export default function PrivateEventsPage() {
           </p>
         }
       >
-        <ButtonLink href={events.officialEvents} external track="official_site_click" trackLocation="events_hero">
-          Event inquiry
+        <ButtonLink href={`tel:${business.phoneE164}`} track="phone_click" trackLocation="events_hero">
+          Call about an event
         </ButtonLink>
       </PageHero>
 

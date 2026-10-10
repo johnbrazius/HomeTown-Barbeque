@@ -58,28 +58,41 @@ export function Footer() {
           ))}
 
           <div className="lg:col-span-3">
-            <h2 className="label text-cream/60">Official</h2>
+            <h2 className="label text-cream/60">Contact</h2>
             <ul className="mt-4 space-y-2">
-              {[
-                { label: "hometownbbq.com", href: business.officialSite, track: "official_site_click" },
-                { label: "Red Hook menu", href: business.officialMenu, track: "official_menu_click" },
-                { label: "Hours & locations", href: business.officialLocations, track: "official_site_click" },
-                { label: "Directions", href: business.directions, track: "directions_click" },
-              ].map((l) => (
-                <li key={l.label}>
-                  <a
-                    href={l.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-track={l.track}
-                    data-track-location="footer"
-                    className="text-cream/85 hover:text-ember-bright"
-                  >
-                    {l.label} <span aria-hidden>↗</span>
-                    <span className="sr-only"> (opens in a new tab)</span>
-                  </a>
-                </li>
-              ))}
+              <li>
+                <a
+                  href={`tel:${business.phoneE164}`}
+                  data-track="phone_click"
+                  data-track-location="footer_contact"
+                  className="text-cream/85 hover:text-ember-bright"
+                >
+                  Call {business.phoneDisplay}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`mailto:${business.cateringEmail}`}
+                  data-track="catering_email_click"
+                  data-track-location="footer"
+                  className="break-all text-cream/85 hover:text-ember-bright"
+                >
+                  {business.cateringEmail}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={business.directions}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-track="directions_click"
+                  data-track-location="footer"
+                  className="text-cream/85 hover:text-ember-bright"
+                >
+                  Directions <span aria-hidden>↗</span>
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              </li>
             </ul>
           </div>
         </div>

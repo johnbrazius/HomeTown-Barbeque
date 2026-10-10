@@ -83,7 +83,7 @@ export default function LocationsPage() {
           </ul>
           <p className="mt-10 max-w-2xl text-ink/70">
             Hours, menus and policies differ between locations. Details for Industry City and Miami are summarized from
-            public sources — always check each location’s official channels before you go.
+            public sources — always call ahead before you go.
           </p>
         </div>
       </section>

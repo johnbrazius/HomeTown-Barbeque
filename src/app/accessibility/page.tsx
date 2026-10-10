@@ -38,7 +38,7 @@ export default function AccessibilityPage() {
         </ul>
         <h2>Known limitations</h2>
         <ul>
-          <li>Pages on third-party sites we link to — such as the official menu, maps and press articles — are outside our control.</li>
+          <li>Pages on third-party sites we link to — such as maps, transit schedules and press articles — are outside our control.</li>
           <li>The embedded Google map may not be fully accessible; use the “Get directions” link instead.</li>
         </ul>
         <h2>Need help?</h2>

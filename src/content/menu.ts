@@ -7,11 +7,12 @@ import type { ImageKey } from "./images";
  * the Red Hook menu (official menu page excerpts and the restaurant's Google
  * listing).
  * Prices are intentionally left blank: published figures disagreed between
- * sources at the time of writing, so the site links to the official menu
+ * sources at the time of writing, so the site asks guests to check at the
+ * counter
  * instead. Add a `price` string (e.g. "$20 / ½ lb") once confirmed and it
  * renders automatically.
  *
- * Menus change — treat hometownbbq.com/menu-rh as the source of truth.
+ * Menus change — confirm items and prices with the restaurant.
  */
 
 export type MenuItem = {

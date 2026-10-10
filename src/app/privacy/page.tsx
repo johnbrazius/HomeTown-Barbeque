@@ -38,7 +38,7 @@ export default function PrivacyPage() {
             loaded, Google’s privacy policy applies.
           </li>
           <li>
-            <strong>External links:</strong> links to the official Hometown site, maps, transit and press
+            <strong>External links:</strong> links to maps, transit and press
             articles take you to other websites with their own privacy policies.
           </li>
           <li>
@@ -48,7 +48,7 @@ export default function PrivacyPage() {
         <h2>Your choices</h2>
         <p>
           Because nothing personal is collected through this site, there’s nothing to delete or export. If you have a
-          question, contact the restaurant through its official channels.
+          question, call the restaurant.
         </p>
         <p className="text-base text-ink/60">This policy should be reviewed by the site owner and legal counsel before launch.</p>
       </Prose>

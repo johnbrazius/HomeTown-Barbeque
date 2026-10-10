@@ -1,4 +1,3 @@
-import { business } from "@/content/site";
 import { menu } from "@/content/menu";
 import { img } from "@/lib/images";
 import { ButtonLink } from "@/components/ui/ButtonLink";
@@ -33,21 +32,15 @@ export function MenuShowcase() {
           </div>
           <Reveal delay={0.12} className="space-y-6 lg:col-span-5 lg:pb-3">
             <p className="max-w-md text-lg leading-relaxed text-cream/75">
-              A selection from the Red Hook counter. The menu changes with the pit — check the official menu for
-              today’s lineup{hasPrices ? "." : " and current prices."}
+              A selection from the Red Hook counter. The menu changes with the pit — ask at the counter for today’s
+              lineup{hasPrices ? "." : " and current prices."}
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
               <ButtonLink href="/menu" track="menu_cta_click" trackLocation="home_menu">
                 See the full menu
               </ButtonLink>
-              <ButtonLink
-                href={business.officialMenu}
-                external
-                track="official_menu_click"
-                trackLocation="menu_header"
-                variant="outline"
-              >
-                Official menu
+              <ButtonLink href="/barbecue-101" variant="outline">
+                How ordering works
               </ButtonLink>
             </div>
           </Reveal>

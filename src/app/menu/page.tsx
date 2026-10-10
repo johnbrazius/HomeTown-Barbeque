@@ -33,8 +33,8 @@ export default function MenuPage() {
         }
       >
         <div className="flex flex-col gap-3 sm:flex-row">
-          <ButtonLink href={business.officialMenu} external track="official_menu_click" trackLocation="menu_page_hero">
-            Official menu &amp; prices
+          <ButtonLink href="/visit" track="menu_cta_click" trackLocation="menu_page_hero">
+            Plan a visit
           </ButtonLink>
           <ButtonLink href="/barbecue-101" variant="outline">
             How ordering works
@@ -131,18 +131,16 @@ export default function MenuPage() {
               <p>
                 Barbecue is cooked in batches and the lineup changes with the pit. Items can sell out, and specials come and
                 go.{" "}
-                {!hasPrices && "Prices aren’t listed here because they change — the official Red Hook menu has today’s pricing."}
+                {!hasPrices && "Prices aren’t listed here because they change with the market — ask at the counter or call for today’s pricing."}
               </p>
               <p>“Popular” tags reflect public listings, not a house ranking.</p>
               <a
-                href={business.officialMenu}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-track="official_menu_click"
+                href={`tel:${business.phoneE164}`}
+                data-track="phone_click"
                 data-track-location="menu_notes"
                 className="label inline-flex min-h-11 items-center text-ember-bright hover:text-cream"
               >
-                View the official menu ↗<span className="sr-only"> (opens in a new tab)</span>
+                Call {business.phoneDisplay}
               </a>
             </div>
           </div>

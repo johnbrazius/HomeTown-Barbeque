@@ -241,14 +241,14 @@ export function Header() {
                   </a>
                 </div>
                 <a
-                  href={business.officialSite}
+                  href={business.directions}
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-track="official_site_click"
+                  data-track="directions_click"
                   data-track-location="more_panel"
                   className="label mt-8 inline-flex items-center gap-2 text-cream/70 hover:text-cream"
                 >
-                  Official website <ArrowUpRight aria-hidden className="size-3.5" />
+                  Get directions <ArrowUpRight aria-hidden className="size-3.5" />
                   <span className="sr-only"> (opens in a new tab)</span>
                 </a>
               </div>

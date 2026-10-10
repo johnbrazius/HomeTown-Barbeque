@@ -30,8 +30,8 @@ export default function LiveMusicPage() {
         accent="sound."
         intro={<p>Barbecue tastes better with a band. On weekend nights, Hometown’s hall turns up the volume.</p>}
       >
-        <ButtonLink href={business.officialSite} external variant="outline" track="official_site_click" trackLocation="music_hero">
-          Who’s playing — official site
+        <ButtonLink href={`tel:${business.phoneE164}`} variant="outline" track="phone_click" trackLocation="music_hero">
+          Call to ask who’s playing
         </ButtonLink>
       </PageHero>
 
@@ -94,7 +94,7 @@ export default function LiveMusicPage() {
               honky-tonk and blues to go with the barbecue.
             </p>
             <p>
-              Line-ups change, so the restaurant’s official site and channels are the place to check what’s on.
+              Line-ups change week to week — call the restaurant to ask who’s playing.
             </p>
             <p>
               <a

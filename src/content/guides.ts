@@ -1,8 +1,8 @@
 /**
  * FAQ, events, locations, neighborhood and Barbecue 101 content.
  *
- * Restaurant-specific answers paraphrase the official FAQ and event pages
- * (hometownbbq.com/eat-together, /event-catering). General barbecue and
+ * Restaurant-specific answers paraphrase the restaurant's own published FAQ
+ * and event information. General barbecue and
  * neighborhood information is written as guidance, not as claims about the
  * restaurant. Re-check against official sources before launch.
  */
@@ -20,8 +20,8 @@ export const faqs: { group: string; items: Faq[] }[] = [
       },
       {
         q: "What are the hours?",
-        a: "Hometown is closed on Mondays and opens at noon the rest of the week. Closing times vary by day, and the pit can close early when the meat sells out — check the official site or call before you head over.",
-        link: { label: "Official hours", href: business.officialLocations },
+        a: "Hometown is closed on Mondays and opens at noon the rest of the week. Closing times vary by day, and the pit can close early when the meat sells out — call before you head over.",
+        link: { label: "Visit details", href: "/visit" },
       },
       {
         q: "Is there a wait?",
@@ -63,8 +63,8 @@ export const faqs: { group: string; items: Faq[] }[] = [
       },
       {
         q: "Where can I see prices?",
-        a: "Prices change with the market and the pit, so the official Red Hook menu is the place for current pricing.",
-        link: { label: "Official menu", href: business.officialMenu },
+        a: "Prices change with the market and the pit — ask at the counter or call the restaurant for current pricing.",
+        link: { label: "See the menu", href: "/menu" },
       },
       {
         q: "What if something is sold out?",
@@ -81,7 +81,6 @@ export const events = {
     { when: "Friday nights & Sunday lunch", what: "Occasionally" },
   ],
   cateringMin: 45,
-  officialEvents: "https://hometownbbq.com/event-catering",
 };
 
 export type Location = {
@@ -106,15 +105,13 @@ export const locations: Location[] = [
     name: "Hometown Bar-B-Que",
     area: "Industry City, Sunset Park",
     address: "87 35th Street, Brooklyn, NY",
-    note: "Opened in 2019 inside the Industry City complex. Check the official site for its current status before visiting.",
-    href: business.officialLocations,
+    note: "Opened in 2019 inside the Industry City complex. Call ahead to confirm its current status before visiting.",
   },
   {
     name: "Hometown Barbecue Miami",
     area: "Allapattah, Miami",
     address: "1200 NW 22nd Street, Miami, FL",
-    note: "Hometown’s Florida outpost, opened in 2019. It runs its own site and reservation policy.",
-    href: "https://hometownbbqmiami.com/",
+    note: "Hometown’s Florida outpost, opened in 2019. It runs its own hours and reservation policy.",
   },
 ];
 

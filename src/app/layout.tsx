@@ -7,6 +7,7 @@ import { allowIndexing, siteUrl } from "@/lib/site-url";
 import { analyticsDomain, analyticsEnabled } from "@/lib/analytics";
 import { restaurantJsonLd } from "@/lib/structured-data";
 import { Header } from "@/components/layout/Header";
+import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 import { Footer } from "@/components/layout/Footer";
 import { MobileActionBar } from "@/components/layout/MobileActionBar";
 import { RevealObserver } from "@/components/ui/RevealObserver";
@@ -94,6 +95,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(restaurantJsonLd()).replace(/</g, "\\u003c") }}
         />
         <Header />
+        <AnnouncementBar />
         <main id="main" tabIndex={-1} className="outline-none">
           {children}
         </main>

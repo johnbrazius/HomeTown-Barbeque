@@ -111,6 +111,14 @@ export function Visit({ index = "05" }: { index?: string }) {
                 </dl>
               )}
               <p className="mt-4 text-sm leading-relaxed text-cream/60">{hours.note}</p>
+              <p className="label mt-3 text-[0.65rem] text-cream/60">
+                Last reviewed{" "}
+                {new Date(`${hours.reviewed}T12:00:00`).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              </p>
               <a
                 href={business.officialLocations}
                 target="_blank"

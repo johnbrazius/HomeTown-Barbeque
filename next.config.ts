@@ -1,6 +1,11 @@
 import type { NextConfig } from "next";
+import { legacyRedirects } from "./src/content/legacy-redirects";
 
 const nextConfig: NextConfig = {
+  // Old hometownbbq.com URLs → new pages (see src/content/legacy-redirects.ts)
+  redirects() {
+    return legacyRedirects.map((r) => ({ ...r, permanent: true }));
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     qualities: [75],

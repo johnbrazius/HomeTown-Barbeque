@@ -19,6 +19,8 @@ export const business = {
   phoneE164: "+13472944644",
   cuisine: ["Barbecue"],
   founded: "2013",
+  /** One address, used everywhere — the old site listed several different ones. */
+  cateringEmail: "catering@hometownbbq.com",
   officialSite: "https://hometownbbq.com/",
   officialMenu: "https://hometownbbq.com/menu-rh",
   officialLocations: "https://hometownbbq.com/locations",
@@ -51,11 +53,14 @@ export type DayHours = {
 
 export const hours: {
   verified: boolean;
+  /** When someone last confirmed these hours (YYYY-MM-DD). Shown on the site. */
+  reviewed: string;
   summary: { label: string; value: string }[];
   note: string;
   schedule: DayHours[];
 } = {
   verified: false,
+  reviewed: "2026-10-10",
   summary: [
     { label: "Tuesday – Sunday", value: "Doors at noon" },
     { label: "Monday", value: "Closed" },

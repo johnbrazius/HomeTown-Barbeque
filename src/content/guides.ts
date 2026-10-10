@@ -29,7 +29,12 @@ export const faqs: { group: string; items: Faq[] }[] = [
       },
       {
         q: "Can I get takeout?",
-        a: "Yes — the restaurant offers dine-in and takeaway.",
+        a: "Yes — order at the counter and take it to go. Takeout orders aren’t taken over the phone or by email.",
+      },
+      {
+        q: "Do you deliver?",
+        a: "No. For groups of 45 or more, Hometown caters off-site instead.",
+        link: { label: "Catering", href: "/catering" },
       },
     ],
   },
@@ -43,7 +48,7 @@ export const faqs: { group: string; items: Faq[] }[] = [
       },
       {
         q: "Do you cater?",
-        a: "Yes. Hometown offers off-site catering for groups of 45 or more and staffs each event to suit the style of service you want.",
+        a: `Yes. Hometown offers off-site catering for groups of 45 or more and staffs each event to suit the style of service you want. Email ${business.cateringEmail} to start.`,
         link: { label: "Catering", href: "/catering" },
       },
     ],

@@ -17,7 +17,7 @@ export const metadata = pageMeta({
 });
 
 const steps = [
-  { title: "Reach out", body: "Send an inquiry through the official catering page or call the restaurant." },
+  { title: "Reach out", body: `Email ${business.cateringEmail} or call the restaurant.` },
   { title: "Build the menu", body: "Work with the team to choose the meats, sides and extras for your crowd." },
   { title: "Pick the service", body: "Staffing is planned around the type of service you want for the day." },
   { title: "Eat", body: "Hometown barbecue, wherever your people are." },
@@ -127,12 +127,17 @@ export default function CateringPage() {
               ))}
             </ul>
             <p className="mt-8 text-cream/60">
-              Inquiries are handled by the restaurant through its official catering page — this site doesn’t collect or
-              send any booking information.
+              Inquiries go straight to the restaurant’s catering team — this site doesn’t collect or store any booking
+              information.
             </p>
-            <ButtonLink href={events.officialEvents} external className="mt-6" track="official_site_click" trackLocation="catering_checklist">
-              Go to the catering page
-            </ButtonLink>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <ButtonLink href={`mailto:${business.cateringEmail}`} track="catering_email_click" trackLocation="catering_checklist">
+                Email {business.cateringEmail}
+              </ButtonLink>
+              <ButtonLink href={events.officialEvents} external variant="outline" track="official_site_click" trackLocation="catering_checklist">
+                Official catering page
+              </ButtonLink>
+            </div>
           </div>
         </div>
       </section>

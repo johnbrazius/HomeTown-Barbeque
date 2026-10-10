@@ -1,4 +1,4 @@
-# hometownbbq.com — audit & what the redesign fixes
+# Hometown Bar-B-Que — Website Audit & Redesign
 
 Prepared October 2026. Findings come from the pages search engines currently index for
 hometownbbq.com (the live site couldn't be loaded directly from the build environment), so
@@ -22,6 +22,13 @@ re-check each item on the live site before presenting it.
 | 12 | **The story isn't told.** Hurricane Sandy, the 2013 opening, the MICHELIN Bib Gourmand and the press coverage don't have a home. | — | **Our Story** (timeline), **Press & Recognition** and a **MICHELIN** band on key pages. |
 
 ## What else the redesign adds
+
+- **Their brand throughout**: the Hometown logo in the header, footer and browser tab, with a navy,
+  brick-red and cream palette taken from it.
+- **Instagram and Facebook** linked in the footer, menus, Visit page and Live Music page, and connected
+  to the restaurant in search-engine data.
+- **Visitors stay on the site**: menu, hours, catering and events end in a call, an email, directions
+  or a page on the site, never a dead end.
 
 - **15 pages**, each with a clear job: Menu, Story, The Pit, Visit, Live Music, Catering,
   Private Events, Locations, Press, FAQ, Red Hook guide, Barbecue 101, Accessibility, Privacy.

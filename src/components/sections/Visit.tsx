@@ -21,7 +21,7 @@ function to12h(t: string) {
   return m ? `${hh}:${String(m).padStart(2, "0")}${suffix}` : `${hh}${suffix}`;
 }
 
-export function Visit() {
+export function Visit({ index = "05" }: { index?: string }) {
   const showSchedule = hours.verified && hours.schedule.length > 0;
 
   return (
@@ -29,7 +29,7 @@ export function Visit() {
       <div className="mx-auto max-w-[1440px] px-5 py-24 sm:px-8 md:py-36 lg:px-12">
         <Reveal>
           <p className="label flex items-center gap-3 text-ember-glow">
-            <span>05</span>
+            <span>{index}</span>
             <span aria-hidden className="h-px w-10 bg-ember" />
             <span>Visit · Red Hook</span>
           </p>

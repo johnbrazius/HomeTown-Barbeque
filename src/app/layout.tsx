@@ -5,6 +5,12 @@ import { business } from "@/content/site";
 import { img } from "@/lib/images";
 import { allowIndexing, siteUrl } from "@/lib/site-url";
 import { analyticsDomain, analyticsEnabled } from "@/lib/analytics";
+import { restaurantJsonLd } from "@/lib/structured-data";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
+import { MobileActionBar } from "@/components/layout/MobileActionBar";
+import { RevealObserver } from "@/components/ui/RevealObserver";
+import { AnalyticsListener } from "@/components/ui/AnalyticsListener";
 import "./globals.css";
 
 const display = Big_Shoulders({
@@ -83,7 +89,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
       <body>
-        {children}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(restaurantJsonLd()).replace(/</g, "\\u003c") }}
+        />
+        <Header />
+        <main id="main" tabIndex={-1} className="outline-none">
+          {children}
+        </main>
+        <Footer />
+        <MobileActionBar />
+        <RevealObserver />
+        <AnalyticsListener />
         {analyticsEnabled && (
           <Script defer data-domain={analyticsDomain} src="https://plausible.io/js/script.js" strategy="afterInteractive" />
         )}

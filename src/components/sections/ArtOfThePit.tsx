@@ -38,8 +38,8 @@ export function ArtOfThePit() {
             </Reveal>
             <Reveal delay={0.16} className="mt-10 max-w-md space-y-5 text-lg leading-relaxed text-ink/80">
               <p>
-                Hometown opened on Van Brunt Street in {business.founded} with a simple idea: barbecue cooked the
-                old way, in the middle of Red Hook.
+                Hometown opened on Van Brunt Street in {business.founded} — a year late, after Hurricane Sandy flooded
+                the build-out — with a simple idea: barbecue cooked the old way, in the middle of Red Hook.
               </p>
               <p>
                 The meat is smoked over oak using traditional Southern techniques — low heat, real wood, and
@@ -47,9 +47,14 @@ export function ArtOfThePit() {
               </p>
             </Reveal>
             <Reveal delay={0.22} className="mt-10">
-              <ButtonLink href="#pit" variant="ghost">
-                How the pit works
-              </ButtonLink>
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <ButtonLink href="/story" variant="ink">
+                  Read our story
+                </ButtonLink>
+                <ButtonLink href="/the-pit" variant="ghost">
+                  How the pit works
+                </ButtonLink>
+              </div>
             </Reveal>
           </div>
 

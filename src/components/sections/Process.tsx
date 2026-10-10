@@ -1,6 +1,7 @@
 import { img } from "@/lib/images";
 import type { ImageKey } from "@/content/images";
 import { Reveal } from "@/components/ui/Reveal";
+import { ButtonLink } from "@/components/ui/ButtonLink";
 import { ProcessStages, type Stage } from "./ProcessStages";
 
 /**
@@ -30,7 +31,7 @@ const stages: { key: ImageKey; title: string; body: string }[] = [
   },
 ];
 
-export function Process() {
+export function Process({ link = false, index = "03" }: { link?: boolean; index?: string }) {
   const data: Stage[] = stages.map((s) => ({ ...s, image: img(s.key) }));
   return (
     <section id="pit" aria-labelledby="pit-title" className="grain relative bg-ink">
@@ -38,7 +39,7 @@ export function Process() {
         <div className="grid gap-8 lg:grid-cols-12">
           <Reveal className="lg:col-span-7">
             <p className="label flex items-center gap-3 text-ember-bright">
-              <span>03</span>
+              <span>{index}</span>
               <span aria-hidden className="h-px w-10 bg-ember" />
               <span>The pit · Our craft</span>
             </p>
@@ -52,6 +53,11 @@ export function Process() {
             <p className="max-w-md text-lg leading-relaxed text-cream/70">
               There’s no secret to barbecue, only patience. Here’s how the day moves through the pit.
             </p>
+            {link && (
+              <ButtonLink href="/the-pit" variant="outline" className="mt-6">
+                Inside the pit
+              </ButtonLink>
+            )}
           </Reveal>
         </div>
       </div>

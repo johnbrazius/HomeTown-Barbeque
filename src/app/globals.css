@@ -178,3 +178,21 @@
     transform: scale(1);
   }
 }
+
+/* Live music equalizer — decorative, off for reduced motion */
+.eq-bar {
+  transform-origin: bottom;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .eq-bar {
+    animation: eq 1.4s ease-in-out infinite alternate;
+  }
+}
+@keyframes eq {
+  from {
+    transform: scaleY(0.35);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}

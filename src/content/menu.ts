@@ -3,8 +3,9 @@ import type { ImageKey } from "./images";
 /**
  * Red Hook menu content.
  *
- * Item names were cross-checked against public listings of the Red Hook menu
- * (official menu page excerpts and the restaurant's Google listing).
+ * Item names and descriptions were cross-checked against public listings of
+ * the Red Hook menu (official menu page excerpts and the restaurant's Google
+ * listing).
  * Prices are intentionally left blank: published figures disagreed between
  * sources at the time of writing, so the site links to the official menu
  * instead. Add a `price` string (e.g. "$20 / ½ lb") once confirmed and it
@@ -46,6 +47,7 @@ export const menu: MenuCategory[] = [
     },
     items: [
       { name: "Brisket", tags: ["by weight", "popular"] },
+      { name: "Beef Rib", note: "A single bone, sold by the pound", tags: ["by weight"] },
       { name: "Pulled Pork", tags: ["popular"] },
       { name: "Italian Sausage", tags: ["popular"] },
     ],
@@ -61,9 +63,9 @@ export const menu: MenuCategory[] = [
     },
     items: [
       { name: "Pork Spare Ribs" },
-      { name: "Korean Ribs" },
-      { name: "Jerk Ribs" },
-      { name: "Chicken Wings" },
+      { name: "Korean Sticky Ribs", note: "Korean barbecue sauce, scallion, cashews, fried shallots, garlic" },
+      { name: "Jerk Rib Tips", note: "Cilantro ranch, scallions" },
+      { name: "Vietnamese Hot Wings", note: "Sesame seeds, scallion, cilantro ranch" },
     ],
   },
   {
@@ -78,7 +80,7 @@ export const menu: MenuCategory[] = [
     items: [
       { name: "Pulled Pork Sandwich", tags: ["popular"] },
       { name: "Pastrami Sandwich", tags: ["popular"] },
-      { name: "Lamb Banh Mi", tags: ["popular"] },
+      { name: "Lamb Banh Mi", note: "Baguette, pickled daikon and carrot, hot and sweet sauce, cilantro", tags: ["popular"] },
       { name: "Brisket Taco", tags: ["popular"] },
       { name: "Frito Pie", tags: ["popular"] },
     ],

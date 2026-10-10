@@ -24,7 +24,7 @@ const notes = [
   {
     icon: Music,
     title: "Live music",
-    body: "Red Hook hosts live music on select nights. Check the official calendar for who’s playing.",
+    body: "Bands play the hall on weekend nights — the soundtrack to the line and the meal.",
   },
 ];
 
@@ -89,15 +89,14 @@ export function Atmosphere() {
             </ul>
 
             <Reveal delay={0.1} className="mt-10">
-              <ButtonLink
-                href={business.officialSite}
-                external
-                variant="ink"
-                track="official_site_click"
-                trackLocation="atmosphere"
-              >
-                Events on the official site
-              </ButtonLink>
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <ButtonLink href="/live-music" variant="ink">
+                  Live music
+                </ButtonLink>
+                <ButtonLink href="/private-events" variant="ghost">
+                  Private events
+                </ButtonLink>
+              </div>
             </Reveal>
           </div>
         </div>

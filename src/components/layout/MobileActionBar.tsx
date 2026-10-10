@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { BookOpen, Phone, Navigation } from "lucide-react";
 import { business } from "@/content/site";
@@ -29,10 +30,10 @@ export function MobileActionBar() {
       inert={!show}
     >
       <div className="flex divide-x divide-cream/10">
-        <a href="#menu" className={`${item} text-cream`} data-track="menu_cta_click" data-track-location="mobile_bar">
+        <Link href="/menu" className={`${item} text-cream`} data-track="menu_cta_click" data-track-location="mobile_bar">
           <BookOpen aria-hidden className="size-4" />
           Menu
-        </a>
+        </Link>
         <a
           href={`tel:${business.phoneE164}`}
           className={`${item} text-cream`}

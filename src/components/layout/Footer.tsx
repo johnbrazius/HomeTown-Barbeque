@@ -1,4 +1,6 @@
-import { business, conceptNotice, nav } from "@/content/site";
+import Link from "next/link";
+import { business, conceptNotice, legalNav, navGroups } from "@/content/site";
+import { recognition } from "@/content/story";
 import { Wordmark } from "@/components/ui/Wordmark";
 
 export function Footer() {
@@ -10,15 +12,10 @@ export function Footer() {
         </p>
 
         <div className="mt-14 grid gap-12 border-t border-cream/15 pt-12 sm:grid-cols-2 lg:grid-cols-12">
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-3">
             <Wordmark className="text-cream" />
             <p className="mt-6 max-w-xs text-cream/60">Pit-smoked barbecue on Van Brunt Street, Red Hook, Brooklyn.</p>
-          </div>
-
-          <div className="lg:col-span-3">
-            <h2 className="label text-cream/60">Find us</h2>
-            <address className="mt-4 space-y-1 not-italic text-cream/85">
-              <p>{business.name}</p>
+            <address className="mt-6 space-y-1 not-italic text-cream/85">
               <p>{business.street}</p>
               <p>
                 {business.locality}, {business.region} {business.postalCode}
@@ -34,20 +31,31 @@ export function Footer() {
                 </a>
               </p>
             </address>
+            <a
+              href={recognition.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="label mt-8 inline-flex border border-cream/20 px-3 py-2 text-cream/80 hover:border-cream/50"
+            >
+              {recognition.label}
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
           </div>
 
-          <nav aria-label="Footer" className="lg:col-span-2">
-            <h2 className="label text-cream/60">On this page</h2>
-            <ul className="mt-4 space-y-2">
-              {nav.map((n) => (
-                <li key={n.href}>
-                  <a href={n.href} className="text-cream/85 hover:text-ember-bright">
-                    {n.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          {navGroups.map((g) => (
+            <nav key={g.title} aria-label={`${g.title} links`} className="lg:col-span-2">
+              <h2 className="label text-cream/60">{g.title}</h2>
+              <ul className="mt-4 space-y-2">
+                {g.items.map((n) => (
+                  <li key={n.href}>
+                    <Link href={n.href} className="text-cream/85 hover:text-ember-bright">
+                      {n.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
 
           <div className="lg:col-span-3">
             <h2 className="label text-cream/60">Official</h2>
@@ -76,9 +84,17 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-4 border-t border-cream/10 pt-6 text-xs leading-relaxed text-cream/60 md:flex-row md:justify-between">
+        <div className="mt-16 flex flex-col gap-4 border-t border-cream/10 pt-6 text-xs leading-relaxed text-cream/60 md:flex-row md:items-start md:justify-between">
           <p className="max-w-3xl">{conceptNotice}</p>
-          <p className="shrink-0">Redesign concept · Not the official website</p>
+          <ul className="flex shrink-0 gap-5">
+            {legalNav.map((l) => (
+              <li key={l.href}>
+                <Link href={l.href} className="underline decoration-cream/30 underline-offset-4 hover:text-cream">
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </footer>

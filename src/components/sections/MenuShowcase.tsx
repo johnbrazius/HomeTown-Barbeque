@@ -36,15 +36,20 @@ export function MenuShowcase() {
               A selection from the Red Hook counter. The menu changes with the pit — check the official menu for
               today’s lineup{hasPrices ? "." : " and current prices."}
             </p>
-            <ButtonLink
-              href={business.officialMenu}
-              external
-              track="official_menu_click"
-              trackLocation="menu_header"
-              variant="outline"
-            >
-              Full official menu
-            </ButtonLink>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <ButtonLink href="/menu" track="menu_cta_click" trackLocation="home_menu">
+                See the full menu
+              </ButtonLink>
+              <ButtonLink
+                href={business.officialMenu}
+                external
+                track="official_menu_click"
+                trackLocation="menu_header"
+                variant="outline"
+              >
+                Official menu
+              </ButtonLink>
+            </div>
           </Reveal>
         </div>
 

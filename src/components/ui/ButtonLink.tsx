@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import type { ReactNode } from "react";
 
@@ -37,15 +38,9 @@ export function ButtonLink({
   ...rest
 }: Props) {
   const Icon = external ? ArrowUpRight : ArrowRight;
-  return (
-    <a
-      href={href}
-      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-      data-track={track}
-      data-track-location={trackLocation}
-      className={`label group inline-flex min-h-12 items-center justify-between gap-4 px-5 py-3.5 transition-colors duration-300 ease-(--ease-smoke) ${styles[variant]} ${className}`}
-      {...rest}
-    >
+  const cls = `label group inline-flex min-h-12 items-center justify-between gap-4 px-5 py-3.5 transition-colors duration-300 ease-(--ease-smoke) ${styles[variant]} ${className}`;
+  const inner = (
+    <>
       <span>{children}</span>
       <Icon
         aria-hidden
@@ -56,6 +51,28 @@ export function ButtonLink({
         }`}
       />
       {external && <span className="sr-only"> (opens in a new tab)</span>}
+    </>
+  );
+
+  // Internal routes get client-side navigation
+  if (href.startsWith("/") && !external) {
+    return (
+      <Link href={href} data-track={track} data-track-location={trackLocation} className={cls} {...rest}>
+        {inner}
+      </Link>
+    );
+  }
+
+  return (
+    <a
+      href={href}
+      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      data-track={track}
+      data-track-location={trackLocation}
+      className={cls}
+      {...rest}
+    >
+      {inner}
     </a>
   );
 }

@@ -70,7 +70,7 @@ export const serviceModel = [
     body: "Order at the counter. Meats are sold by weight alongside sandwiches, sides and dessert.",
   },
   {
-    title: "Walk in",
+    title: "No reservations",
     body: "First come, first served — when the day’s barbecue is gone, it’s gone.",
   },
   {
@@ -79,13 +79,50 @@ export const serviceModel = [
   },
 ] as const;
 
-export type NavItem = { label: string; href: string };
+export type NavItem = { label: string; href: string; blurb?: string };
 
+/** Main header links (desktop shows these inline). */
 export const nav: NavItem[] = [
-  { label: "Menu", href: "#menu" },
-  { label: "Our Story", href: "#story" },
-  { label: "The Pit", href: "#pit" },
-  { label: "Visit", href: "#visit" },
+  { label: "Menu", href: "/menu" },
+  { label: "Our Story", href: "/story" },
+  { label: "The Pit", href: "/the-pit" },
+  { label: "Visit", href: "/visit" },
+];
+
+/** Everything else, grouped. Drives the "More" menu, mobile drawer, footer and sitemap. */
+export const navGroups: { title: string; items: NavItem[] }[] = [
+  {
+    title: "Eat",
+    items: [
+      { label: "Menu", href: "/menu", blurb: "Smoked meats, ribs, sandwiches, sides and dessert." },
+      { label: "Barbecue 101", href: "/barbecue-101", blurb: "How to order by weight, and the words behind the meat." },
+      { label: "Catering", href: "/catering", blurb: "Off-site barbecue for groups of 45 or more." },
+      { label: "Private Events", href: "/private-events", blurb: "Semi-private and private events in Red Hook." },
+    ],
+  },
+  {
+    title: "Hometown",
+    items: [
+      { label: "Our Story", href: "/story", blurb: "From Hurricane Sandy to a Michelin Bib Gourmand." },
+      { label: "The Pit", href: "/the-pit", blurb: "Oak, fire, smoke and time." },
+      { label: "Live Music", href: "/live-music", blurb: "Bands on weekend nights in the hall." },
+      { label: "Press & Recognition", href: "/press", blurb: "What critics and guides have said." },
+    ],
+  },
+  {
+    title: "Visit",
+    items: [
+      { label: "Visit Red Hook", href: "/visit", blurb: "Address, hours, map and how it works." },
+      { label: "Getting to Red Hook", href: "/red-hook", blurb: "Bus, ferry and what to see nearby." },
+      { label: "Locations", href: "/locations", blurb: "Red Hook and the wider Hometown family." },
+      { label: "FAQ", href: "/faq", blurb: "Reservations, groups, waits and more." },
+    ],
+  },
+];
+
+export const legalNav: NavItem[] = [
+  { label: "Accessibility", href: "/accessibility" },
+  { label: "Privacy", href: "/privacy" },
 ];
 
 /** Hero copy — draft wording, edit freely. */
@@ -93,8 +130,8 @@ export const heroCopy = {
   eyebrow: "Red Hook, Brooklyn · Pit-smoked barbecue",
   titleLines: ["Low & slow.", "Brooklyn bold."],
   body: "Oak-smoked barbecue. Deep flavor. A taste of the pit in Red Hook, Brooklyn.",
-  primaryCta: { label: "Explore the menu", href: "#menu" },
-  secondaryCta: { label: "Find us in Red Hook", href: "#visit" },
+  primaryCta: { label: "Explore the menu", href: "/menu" },
+  secondaryCta: { label: "Find us in Red Hook", href: "/visit" },
 } as const;
 
 export const conceptNotice =

@@ -14,17 +14,38 @@ import * as THREE from "three";
  * never re-renders React.
  */
 
-export type ScenePhoto = { url: string; aspect: number };
+/** `urls` are tried in order — e.g. an optimized URL, then the original file. */
+export type ScenePhoto = { urls: string[]; aspect: number };
 
 const GAP = 11; // distance between photos along z
 const VIEW = 7.2; // camera distance in front of the photo it's looking at
 const H = 5.6; // photo height in world units
 
-const layout = (i: number) => ({
-  x: i === 0 ? 0 : i % 2 ? 1.5 : -1.5,
+/** `spread` narrows the zig-zag on tall, narrow screens so photos stay in frame. */
+const layout = (i: number, spread = 1) => ({
+  x: (i === 0 ? 0 : i % 2 ? 1.5 : -1.5) * spread,
   z: -i * GAP,
-  rotY: i === 0 ? 0 : i % 2 ? -0.16 : 0.16,
+  rotY: (i === 0 ? 0 : i % 2 ? -0.16 : 0.16) * spread,
 });
+
+/** Viewport-dependent framing: spread and the widest a photo can be at VIEW distance. */
+const fovFor = (aspect: number) => (aspect < 1 ? 62 : 50);
+
+function useFraming() {
+  const size = useThree((s) => s.size);
+  const aspect = size.width / Math.max(1, size.height);
+  const fov = fovFor(aspect);
+  const visibleW = 2 * VIEW * Math.tan(THREE.MathUtils.degToRad(fov / 2)) * aspect;
+  // On portrait screens, lift photos into the top half so the chapter text below stays clear
+  return { spread: Math.min(1, aspect / 1.4), maxW: visibleW * 0.92, lift: aspect < 1 ? 1.9 : 0 };
+}
+
+function loadFirst(loader: THREE.TextureLoader, urls: string[]): Promise<THREE.Texture> {
+  return urls.reduce<Promise<THREE.Texture>>(
+    (prev, url) => prev.catch(() => loader.loadAsync(url)),
+    Promise.reject(new Error("no url")),
+  );
+}
 
 const smooth = (t: number) => t * t * (3 - 2 * t);
 
@@ -38,6 +59,7 @@ function Panels({
   onError: () => void;
 }) {
   const gl = useThree((s) => s.gl);
+  const { spread, maxW, lift } = useFraming();
   const [textures, setTextures] = useState<THREE.Texture[] | null>(null);
   const mats = useRef<(THREE.MeshBasicMaterial | null)[]>([]);
   const groups = useRef<(THREE.Group | null)[]>([]);
@@ -48,7 +70,7 @@ function Panels({
     let cancelled = false;
     const loader = new THREE.TextureLoader();
     const aniso = Math.min(8, gl.capabilities.getMaxAnisotropy());
-    Promise.all(photos.map((p) => loader.loadAsync(p.url)))
+    Promise.all(photos.map((p) => loadFirst(loader, p.urls)))
       .then((list) => {
         if (cancelled) return list.forEach((t) => t.dispose());
         list.forEach((t) => {
@@ -72,11 +94,11 @@ function Panels({
       const m = mats.current[i];
       const g = groups.current[i];
       if (!m || !g) return;
-      const dz = camera.position.z - layout(i).z;
+      const dz = camera.position.z - layout(i, spread).z;
       // Dissolve as the camera walks through the photo
       m.opacity = THREE.MathUtils.clamp(smooth(THREE.MathUtils.clamp((dz - 0.6) / 3, 0, 1)), 0, 1);
       g.visible = m.opacity > 0.01;
-      g.position.y = Math.sin(t * 0.4 + i) * 0.06;
+      g.position.y = lift + Math.sin(t * 0.4 + i) * 0.06;
     });
   });
 
@@ -85,16 +107,16 @@ function Panels({
   return (
     <>
       {photos.map((p, i) => {
-        const { x, z, rotY } = layout(i);
-        const w = Math.min(H * p.aspect, H * 1.9);
+        const { x, z, rotY } = layout(i, spread);
+        const w = Math.min(H * p.aspect, H * 1.9, maxW);
         const h = w / p.aspect;
         return (
           <group
-            key={p.url}
+            key={p.urls[0]}
             ref={(el) => {
               groups.current[i] = el;
             }}
-            position={[x, 0, z]}
+            position={[x, lift, z]}
             rotation={[0, rotY, 0]}
           >
             <mesh>
@@ -122,17 +144,25 @@ function Panels({
 
 function CameraRig({ count, progress }: { count: number; progress: RefObject<number> }) {
   const { camera, pointer } = useThree();
+  const { spread } = useFraming();
   const target = useMemo(() => new THREE.Vector3(0, 0, VIEW), []);
   const look = useMemo(() => new THREE.Vector3(), []);
   const lookTarget = useMemo(() => new THREE.Vector3(), []);
 
-  useFrame((_, delta) => {
+  useFrame((state, delta) => {
+    // Wider field of view on portrait screens so photos stay in frame
+    const cam = state.camera as THREE.PerspectiveCamera;
+    const fov = fovFor(state.size.width / Math.max(1, state.size.height));
+    if (cam.fov !== fov) {
+      cam.fov = fov;
+      cam.updateProjectionMatrix();
+    }
     const p = THREE.MathUtils.clamp(progress.current ?? 0, 0, 1);
     const s = p * (count - 1);
     const i = Math.min(Math.floor(s), count - 2);
     const f = smooth(THREE.MathUtils.clamp(s - i, 0, 1));
-    const a = layout(i);
-    const b = layout(i + 1);
+    const a = layout(i, spread);
+    const b = layout(i + 1, spread);
     const x = THREE.MathUtils.lerp(a.x, b.x, f);
     const z = THREE.MathUtils.lerp(a.z, b.z, f) + VIEW;
     target.set(x * 0.85 + pointer.x * 0.35, pointer.y * 0.2, z);
@@ -230,10 +260,9 @@ const emberFrag = /* glsl */ `
   }
 `;
 
-function Embers({ length }: { length: number }) {
+function Embers({ length, count }: { length: number; count: number }) {
   const gl = useThree((s) => s.gl);
   const mat = useRef<THREE.ShaderMaterial>(null);
-  const count = 520;
   const { positions, seeds } = useMemo(() => {
     const positions = new Float32Array(count * 3);
     const seeds = new Float32Array(count);
@@ -246,7 +275,7 @@ function Embers({ length }: { length: number }) {
       seeds[i] = rand();
     }
     return { positions, seeds };
-  }, [length]);
+  }, [length, count]);
   const uniforms = useMemo(
     () => ({ uTime: { value: 0 }, uPixelRatio: { value: Math.min(gl.getPixelRatio(), 1.5) } }),
     [gl],
@@ -277,22 +306,25 @@ export default function ExperienceScene({
   photos,
   progress,
   active,
+  lite,
   onReady,
   onError,
 }: {
   photos: ScenePhoto[];
   progress: RefObject<number>;
   active: boolean;
+  /** Phones and tablets: fewer particles, lower resolution */
+  lite: boolean;
   onReady: () => void;
   onError: () => void;
 }) {
   return (
     <Canvas
       aria-hidden
-      dpr={[1, 1.5]}
+      dpr={lite ? [1, 1.25] : [1, 1.5]}
       frameloop={active ? "always" : "never"}
       camera={{ position: [0, 0, VIEW], fov: 50, near: 0.1, far: 80 }}
-      gl={{ antialias: true, alpha: false, powerPreference: "high-performance" }}
+      gl={{ antialias: !lite, alpha: false, powerPreference: lite ? "default" : "high-performance" }}
       style={{ position: "absolute", inset: 0 }}
       eventSource={typeof document !== "undefined" ? document.body : undefined}
       eventPrefix="client"
@@ -303,7 +335,7 @@ export default function ExperienceScene({
       }}
     >
       <Panels photos={photos} onReady={onReady} onError={onError} />
-      <Embers length={(photos.length - 1) * GAP} />
+      <Embers length={(photos.length - 1) * GAP} count={lite ? 220 : 520} />
       <Smoke />
       <CameraRig count={photos.length} progress={progress} />
     </Canvas>

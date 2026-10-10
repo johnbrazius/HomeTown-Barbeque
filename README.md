@@ -92,7 +92,7 @@ least 1600px wide look best. Missing slots fall back to the concept images.
 Only use photos you have rights to (your own, or supplied by the restaurant). Don't use photos with
 watermarks or from review sites/blogs, and avoid identifiable guests unless they've agreed.
 
-The 3D layer only runs on screens ≥900px wide with WebGL and no reduced-motion preference; everyone else
+The 3D layer runs on any device with WebGL and no reduced-motion preference (a lighter version on phones and tablets); everyone else
 gets the same chapters as crossfading full-screen photos. If any photo fails to load, it falls back the
 same way. Rendering pauses whenever the opener is off-screen.
 

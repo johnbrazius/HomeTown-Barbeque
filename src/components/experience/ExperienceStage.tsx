@@ -12,11 +12,18 @@ const ExperienceScene = dynamic(() => import("./ExperienceScene"), { ssr: false 
 
 export type StageChapter = Chapter & { photo: VenueImage };
 
-/** Same-origin, resized texture URL via the Next image optimizer (no CORS issues). */
-const textureUrl = (src: string) => `/_next/image?url=${encodeURIComponent(src)}&w=1920&q=75`;
+/**
+ * Texture sources, best first: a same-origin resized copy from the Next image
+ * optimizer, then the original file. If a host handles image optimization
+ * differently, the original still loads.
+ */
+const textureUrls = (src: string, lite: boolean) => [
+  `/_next/image?url=${encodeURIComponent(src)}&w=${lite ? 1080 : 1920}&q=75`,
+  src,
+];
 
 function canUse3D() {
-  if (!window.matchMedia("(min-width: 900px) and (prefers-reduced-motion: no-preference)").matches) return false;
+  if (!window.matchMedia("(prefers-reduced-motion: no-preference)").matches) return false;
   const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
   if (conn?.saveData) return false;
   try {
@@ -40,14 +47,19 @@ export function ExperienceStage({ chapters }: { chapters: StageChapter[] }) {
   const barRef = useRef<HTMLSpanElement>(null);
   const [active, setActive] = useState(0);
   const [use3D, setUse3D] = useState(false);
+  const [lite, setLite] = useState(false);
   const [ready, setReady] = useState(false);
   const [inView, setInView] = useState(true);
 
   useEffect(() => {
     if (!canUse3D()) return;
+    const start = () => {
+      setLite(window.matchMedia("(max-width: 899px), (pointer: coarse)").matches);
+      setUse3D(true);
+    };
     const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number };
-    if (w.requestIdleCallback) w.requestIdleCallback(() => setUse3D(true), { timeout: 1500 });
-    else window.setTimeout(() => setUse3D(true), 800);
+    if (w.requestIdleCallback) w.requestIdleCallback(start, { timeout: 1500 });
+    else window.setTimeout(start, 800);
   }, []);
 
   // Scroll → progress (ref, no re-render) and active chapter (state, only on change)
@@ -102,8 +114,8 @@ export function ExperienceStage({ chapters }: { chapters: StageChapter[] }) {
   const onError = useCallback(() => setUse3D(false), []);
   // Stable array so the scene doesn't reload textures on every render
   const scenePhotos = useMemo(
-    () => chapters.map((c) => ({ url: textureUrl(c.photo.src), aspect: c.photo.width / c.photo.height })),
-    [chapters],
+    () => chapters.map((c) => ({ urls: textureUrls(c.photo.src, lite), aspect: c.photo.width / c.photo.height })),
+    [chapters, lite],
   );
   const show3D = use3D && ready;
 
@@ -149,6 +161,7 @@ export function ExperienceStage({ chapters }: { chapters: StageChapter[] }) {
               photos={scenePhotos}
               progress={progress}
               active={inView}
+              lite={lite}
               onReady={onReady}
               onError={onError}
             />

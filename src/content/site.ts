@@ -125,14 +125,5 @@ export const legalNav: NavItem[] = [
   { label: "Privacy", href: "/privacy" },
 ];
 
-/** Hero copy — draft wording, edit freely. */
-export const heroCopy = {
-  eyebrow: "Red Hook, Brooklyn · Pit-smoked barbecue",
-  titleLines: ["Low & slow.", "Brooklyn bold."],
-  body: "Oak-smoked barbecue. Deep flavor. A taste of the pit in Red Hook, Brooklyn.",
-  primaryCta: { label: "Explore the menu", href: "/menu" },
-  secondaryCta: { label: "Find us in Red Hook", href: "/visit" },
-} as const;
-
 export const conceptNotice =
   "Independent redesign concept for portfolio purposes. Not affiliated with, commissioned or endorsed by Hometown Bar-B-Que. Food and place imagery is AI-generated and illustrative — it does not depict the restaurant’s actual food or premises.";

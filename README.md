@@ -1,10 +1,10 @@
 # Hometown Bar-B-Que — Red Hook (redesign concept)
 
-A cinematic, single-page website concept for **Hometown Bar-B-Que, 454 Van Brunt Street, Red Hook, Brooklyn**.
+A cinematic, 15-page website concept for **Hometown Bar-B-Que, 454 Van Brunt Street, Red Hook, Brooklyn** — opening with a scroll-driven 3D walk from the street into the restaurant.
 
 > **This is an independent portfolio concept.** It is not affiliated with, commissioned or endorsed by
-> Hometown Bar-B-Que. All imagery is AI-generated and illustrative, not photographs of the restaurant's
-> food or premises. Search indexing is **off by default** (see [Configuration](#configuration)).
+> Hometown Bar-B-Que. Until real photographs are added (see [Venue photos](#venue-photos-3d-home-page)),
+> imagery is AI-generated and illustrative, not photographs of the restaurant's food or premises. Search indexing is **off by default** (see [Configuration](#configuration)).
 
 Built with Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, Three.js via
 React Three Fiber, Motion and Lucide icons.
@@ -32,38 +32,69 @@ Node 20.9+ is required (`engines` in package.json; `.nvmrc` pins 22, which hosts
 
 ---
 
+## Pages
+
+| Route | Page | Route | Page |
+| --- | --- | --- | --- |
+| `/` | Home — 3D “Step inside” opener + overview | `/locations` | Red Hook + the Hometown family |
+| `/menu` | Full menu with category jump links | `/press` | Press & MICHELIN recognition |
+| `/story` | Timeline, pitmaster, Brooklyn flavors | `/faq` | FAQ (+ FAQPage JSON-LD) |
+| `/the-pit` | Principles, process, brisket anatomy | `/red-hook` | Getting here + neighborhood guide |
+| `/visit` | Address, hours, map, how it works | `/barbecue-101` | Ordering guide + glossary |
+| `/live-music` | Weekend music in the hall | `/accessibility` | Accessibility statement |
+| `/catering` | Off-site catering (45+) | `/privacy` | Privacy policy |
+| `/private-events` | Semi-private / private events | | + custom 404 |
+
 ## How it's organised
 
 ```
 src/
-├── app/
-│   ├── layout.tsx         Fonts, metadata, Open Graph, robots, analytics script
-│   ├── page.tsx           Assembles the sections + Restaurant JSON-LD
-│   ├── not-found.tsx      Custom 404
-│   ├── sitemap.ts         /sitemap.xml
-│   ├── robots.ts          /robots.txt (disallow-all until indexing is enabled)
-│   ├── icon.svg           Favicon (concept monogram)
-│   └── globals.css        Design tokens, grain, reveal + hero motion (CSS)
+├── app/                   One folder per route (page.tsx), plus layout, sitemap, robots, 404, icon
 ├── content/               ← edit content here, not in components
-│   ├── site.ts            Address, phone, hours, nav, hero copy, service model, concept notice
+│   ├── site.ts            Address, phone, hours, navigation groups, service model, concept notice
 │   ├── menu.ts            Menu categories and items
-│   └── images.ts          Image manifest (file, remote source, size, alt text, focal point)
+│   ├── story.ts           Timeline, pitmaster, recognition, press list (with sources)
+│   ├── guides.ts          FAQ, events, locations, Red Hook guide, Barbecue 101
+│   ├── experience.ts      Chapter copy for the 3D home opener
+│   ├── venue.ts           Photo slots for the 3D opener (real photos drop in here)
+│   └── images.ts          Concept image manifest (file, remote source, size, alt text)
 ├── lib/
-│   ├── images.ts          Resolves an image key to local file or remote fallback (build time)
-│   ├── structured-data.ts Schema.org Restaurant JSON-LD (verified fields only)
+│   ├── images.ts          Resolves concept images and venue photo slots (build time)
+│   ├── metadata.ts        Per-page title/description/canonical helper
+│   ├── structured-data.ts Restaurant JSON-LD (verified fields only)
 │   ├── analytics.ts       Opt-in analytics + event names
-│   └── site-url.ts        Canonical origin + indexing switch
+│   └── site-url.ts        Canonical origin (auto-detects common hosts) + indexing switch
 └── components/
-    ├── layout/            Header (incl. mobile drawer), Footer, MobileActionBar
-    ├── hero/              Hero, HeroDepth (parallax layers), HeroAtmosphere (WebGL gate), HeroScene (Three.js)
-    ├── sections/          Ticker, ArtOfThePit, MenuShowcase + MenuTabs, Process + ProcessStages,
-    │                      Atmosphere, Visit + MapFacade
-    └── ui/                ButtonLink, Photo, SafeImage, Reveal + RevealObserver, Wordmark, AnalyticsListener
+    ├── experience/        Experience (server), ExperienceStage (scroll stage), ExperienceScene (Three.js)
+    ├── layout/            Header (+ “More” mega menu, mobile drawer), Footer sitemap, MobileActionBar
+    ├── sections/          Home sections, Bands (CTA/explore/recognition), BrisketDiagram, MapFacade…
+    └── ui/                PageHero (+ breadcrumb JSON-LD), SectionHeading, ButtonLink, Photo, Reveal, Prose…
 ```
 
-Server components are the default. Client components are used only where something is interactive or animated:
-the header, hero parallax, WebGL layer, menu tabs, process stages, map facade, mobile action bar, and two tiny
-listeners (scroll reveals, analytics).
+## Venue photos (3D home page)
+
+The home page opens with a scroll-driven walk from the street into the restaurant: six photos hang in a
+3D corridor and the camera moves through them as you scroll. **Real photos replace the placeholders
+automatically** — put them in `public/images/venue/` with these names (`.jpg`, `.jpeg`, `.png` or `.webp`):
+
+| File name | Photo |
+| --- | --- |
+| `exterior` | The building and sign from the street (dusk looks best) |
+| `woodpile` | The oak woodpile against the painted wall |
+| `bar` | The bar under the string lights |
+| `hall` | The dining hall — wooden tables and chairs |
+| `pit` | The steel smoker |
+| `table` | A long table set for a group |
+
+Then rebuild (or push — the host rebuilds). Dimensions are read from the files; landscape photos at
+least 1600px wide look best. Missing slots fall back to the concept images.
+
+Only use photos you have rights to (your own, or supplied by the restaurant). Don't use photos with
+watermarks or from review sites/blogs, and avoid identifiable guests unless they've agreed.
+
+The 3D layer only runs on screens ≥900px wide with WebGL and no reduced-motion preference; everyone else
+gets the same chapters as crossfading full-screen photos. If any photo fails to load, it falls back the
+same way. Rendering pauses whenever the opener is off-screen.
 
 ### Design system
 
@@ -75,12 +106,11 @@ listeners (scroll reveals, analytics).
 
 ### Motion & 3D
 
-- Hero headline/photo entrance is pure CSS, so it plays before JavaScript hydrates.
-- `HeroDepth` layers the photo, atmosphere and type at different scroll/pointer rates (small, legible movement).
-- `HeroScene` is a real Three.js scene: an fbm smoke shader plus ~160 embers spread through depth, with a
-  pointer-driven camera for genuine parallax. It **only loads** on ≥768px screens with a fine pointer, WebGL,
-  no reduced-motion and no Save-Data, after the browser is idle, and it **pauses** when the hero is off-screen.
-  Everyone else gets the static photographic hero, which is designed to stand on its own.
+- The home opener (`components/experience/`) is a sticky stage inside a tall section: normal scrolling
+  drives it, nothing is hijacked. Scroll progress is passed to Three.js through a ref, so scrolling never
+  re-renders React. The scene is loaded on idle, textures are served same-origin through the Next image
+  optimizer, and an fbm smoke layer plus ~500 embers fill the corridor.
+- Inner pages open with a CSS title entrance that plays before JavaScript hydrates.
 - Section reveals use one IntersectionObserver + CSS. Content is never hidden without JS or with reduced motion.
 - `prefers-reduced-motion` disables parallax, WebGL, reveals, the ticker and smooth scrolling.
 
@@ -103,7 +133,7 @@ Each category has an `intro`, a `feature` (image key + title + caption) and `ite
 
 ### Business details & hours — `src/content/site.ts`
 
-Address, phone, links, nav labels, hero copy and the service model live here.
+Address, phone, links, navigation groups and the service model live here. Home opener copy is in `src/content/experience.ts`.
 
 Hours: `hours.verified` is `false`, so the site shows only what every source agreed on (closed Mondays, doors at
 noon) plus a "confirm before you go" note, and **no hours are emitted in structured data**. To publish full hours,
@@ -174,8 +204,11 @@ This checklist matters because the site uses a real business's name and details.
 
 - [ ] **Written approval from Hometown Bar-B-Que** to publish, and their brand assets (logo, wordmark). The current
       wordmark is a text-only concept, not their logo.
-- [ ] **Replace all imagery** with licensed photography of the actual food and venue, then remove the
-      "Illustrative" tags and update alt text.
+- [ ] **Add the six venue photos** (see [Venue photos](#venue-photos-3d-home-page)) and replace the concept
+      food imagery with licensed photography, then remove the "Illustrative" tags and update alt text.
+- [ ] **Story & press:** confirm the timeline (2012 lease, Sandy, September 2013 opening, 2019 expansion), the
+      pitmaster bio, the Bib Gourmand wording/year, and the Industry City and Miami details on `/locations`.
+- [ ] **Events:** confirm the private-event days and the 45-guest catering minimum.
 - [ ] **Hours:** confirm the full weekly schedule, fill `hours.schedule`, set `verified: true`. Sources disagreed
       on closing times when this was built.
 - [ ] **Menu:** confirm every item still appears on <https://hometownbbq.com/menu-rh>, add current prices, and

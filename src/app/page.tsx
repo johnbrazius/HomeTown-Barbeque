@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Hero } from "@/components/hero/Hero";
+import { Experience } from "@/components/experience/Experience";
 import { Ticker } from "@/components/sections/Ticker";
 import { ArtOfThePit } from "@/components/sections/ArtOfThePit";
 import { MenuShowcase } from "@/components/sections/MenuShowcase";
@@ -13,7 +13,7 @@ export const metadata: Metadata = { alternates: { canonical: "/" } };
 export default function Home() {
   return (
     <>
-      <Hero />
+      <Experience />
       <Ticker />
       <ArtOfThePit />
       <RecognitionBand />

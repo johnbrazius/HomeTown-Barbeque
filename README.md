@@ -6,7 +6,7 @@ A cinematic, single-page website concept for **Hometown Bar-B-Que, 454 Van Brunt
 > Hometown Bar-B-Que. All imagery is AI-generated and illustrative, not photographs of the restaurant's
 > food or premises. Search indexing is **off by default** (see [Configuration](#configuration)).
 
-Built with Next.js 16 (App Router, Cache Components), React 19, TypeScript, Tailwind CSS 4, Three.js via
+Built with Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, Three.js via
 React Three Fiber, Motion and Lucide icons.
 
 ---
@@ -28,7 +28,7 @@ npm run dev            # http://localhost:3000
 | `npm run typecheck`    | Generate route types and run `tsc --noEmit`        |
 | `npm run images:fetch` | Download any missing images into `public/images/`  |
 
-Node 20.9+ is required (Node 22 recommended — `images:fetch` imports a `.ts` file directly).
+Node 20.9+ is required (`engines` in package.json; `.nvmrc` pins 22, which hosts like Netlify and Render pick up). `images:fetch` needs Node 22.
 
 ---
 
@@ -131,7 +131,7 @@ Copy `.env.example` to `.env.local` (or set these in Vercel → Project → Sett
 
 | Variable                       | Purpose                                                                                                   |
 | ------------------------------ | --------------------------------------------------------------------------------------------------------- |
-| `NEXT_PUBLIC_SITE_URL`         | Canonical origin for canonical URL, Open Graph, sitemap and JSON-LD. Falls back to Vercel's production URL, then `http://localhost:3000`. |
+| `NEXT_PUBLIC_SITE_URL`         | Canonical origin for canonical URL, Open Graph, sitemap and JSON-LD. If unset, the host's own URL is used (Vercel, Netlify, Render, Railway, Cloudflare Pages), then `http://localhost:3000`. |
 | `NEXT_PUBLIC_ALLOW_INDEXING`   | `true` lets search engines index the site (meta robots + robots.txt). **Leave unset for the concept.** Only enable for a launch the restaurant has approved. |
 | `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` | Enables Plausible analytics (cookieless). Empty = no analytics script at all.                              |
 
